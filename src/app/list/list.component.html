@@ -1,0 +1,3 @@
+<ul *ngFor="let todo of todoList">
+  <li (click)="toggleTodo(todo.id)">ID: {{todo.id}} - Desc: {{todo.description}} - Completed: {{todo.completed}}</li>
+</ul>
