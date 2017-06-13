@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { State } from '../state-management/state/main-state';
-import { ADD_TODO, MARK_ALL_COMPLETE } from '../state-management/actions/main-action-creator';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-input-bar',
   templateUrl: './input-bar.component.html',
   styleUrls: ['./input-bar.component.css']
 })
-export class InputBarComponent implements OnInit {
+export class InputBarComponent {
+  public newTodo = '';
+  @Output() add: EventEmitter<string> = new EventEmitter();
 
-  constructor(private store: Store<State>) { }
+  constructor() { }
 
-  ngOnInit() {
-  }
-
-  public addTodo(newTodo: string) {
-    this.store.dispatch({type: ADD_TODO, payload: newTodo});
+  public addTodo() {
+    if (this.newTodo.trim().length) {
+      this.add.emit(this.newTodo);
+      this.newTodo = '';
+    }
   }
 }

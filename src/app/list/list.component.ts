@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { State } from '../state-management/state/main-state';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../model/todo';
-import { TOGGLE_TODO } from '../state-management/actions/main-action-creator';
 
 @Component({
   selector: 'app-list',
@@ -10,21 +7,15 @@ import { TOGGLE_TODO } from '../state-management/actions/main-action-creator';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  public todoList: Todo[] = [];
+  @Input() todoList: Todo[] = [];
+  @Output() toggleTodo: EventEmitter<number> = new EventEmitter();
 
-  constructor(private store: Store<State>) {
-    this.store.subscribe(
-      state => {
-        this.todoList = state.todoList;
-      }
-    );
-  }
+  constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
-  public toggleTodo(id: number) {
-    this.store.dispatch({type: TOGGLE_TODO, payload: id});
+  public toggle(id: number) {
+    this.toggleTodo.emit(id);
   }
 
 }

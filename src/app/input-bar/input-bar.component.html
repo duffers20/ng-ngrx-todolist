@@ -1,1 +1,1 @@
-<input type="text" #newtodo placeholder="todo.." (keyup.enter)="addTodo(newtodo.value)" />&nbsp;<button (click)="addTodo(newtodo.value)">Add</button>
+<input placeholder="What needs to be done?" [(ngModel)]="newTodo" (keyup.enter)="addTodo()">&nbsp;<button (click)="addTodo()">Add</button>

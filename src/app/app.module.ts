@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { mainReducer } from './state-management/reducers/main-reducer';
 import { StoreModule } from '@ngrx/store';
@@ -19,6 +20,7 @@ import { StatusBarComponent } from './status-bar/status-bar.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     StoreModule.provideStore(mainReducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 10
