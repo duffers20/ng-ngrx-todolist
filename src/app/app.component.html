@@ -1,4 +1,4 @@
 <h1>Todo List App (made with Angular + Reactive Extensions for Angular)</h1>
 <app-input-bar (add)="addTodo($event)"></app-input-bar>
 <app-list [todoList]="todoList" (toggleTodo)="toggleTodo($event)"></app-list>
-<app-status-bar></app-status-bar>
+<app-status-bar (removeCompleted)="removeCompleted($event)"></app-status-bar>

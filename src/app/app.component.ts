@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from './state-management/state/main-state';
-import { ADD_TODO, TOGGLE_TODO } from './state-management/actions/main-action-creator';
+import { addTodo, toggleTodo, removeCompleted } from './state-management/actions/main-action-creator';
 import { Todo } from './model/todo';
 
 @Component({
@@ -21,10 +21,14 @@ export class AppComponent {
   }
 
   addTodo(newTodo: string) {
-    this.store.dispatch({type: ADD_TODO, payload: newTodo})
+    this.store.dispatch(addTodo(newTodo));
   }
 
   toggleTodo(todoID: number) {
-    this.store.dispatch({type: TOGGLE_TODO, payload: todoID});
+    this.store.dispatch(toggleTodo(todoID));
+  }
+
+  removeCompleted() {
+    this.store.dispatch(removeCompleted());
   }
 }

@@ -1,16 +1,13 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import { State, initialState } from '../state/main-state';
-import { ADD_TODO, TOGGLE_TODO } from '../actions/main-action-creator';
+import { ADD_TODO, TOGGLE_TODO, REMOVE_COMPLETE } from '../actions/main-action-creator';
 import { Todo } from '../../model/todo';
 
-export const mainReducer: ActionReducer<State> = (
-    state = initialState,
-    action: Action
-) => {
+export function mainReducer(state: State = initialState, action: Action) {
     switch (action.type) {
 
         case ADD_TODO: {
-            const newId: number = state.todoList.length;
+            const newId: number = state.nextID;
             const newTodo: Todo = {
                 id: newId,
                 description: action.payload,
@@ -20,20 +17,31 @@ export const mainReducer: ActionReducer<State> = (
             return {
                 ...state,
                 todoList: [...state.todoList, newTodo],
-                todosRemaining: state.todosRemaining++
+                nextID: newId + 1
             }
         }
 
         case TOGGLE_TODO: {
             const id: number = action.payload;
+            const todoList: Todo[] = state.todoList.map (
+                (todo, i) => i === id ? {...todo, completed: !todo.completed}
+                                      : todo
+            );
 
             return {
                 ...state,
-                todoList: state.todoList.map (
-                    (todo, i) => i === id ? {...todo, completed: !todo.completed}
-                                          : todo
-                ),
-                todosRemaining: state.todosRemaining--
+                todoList: todoList
+            }
+        }
+
+        case REMOVE_COMPLETE: {
+            const todoList: Todo[] = state.todoList.filter (
+                todo => todo.completed === false
+            );
+
+            return {
+                ...state,
+                todoList: todoList
             }
         }
 

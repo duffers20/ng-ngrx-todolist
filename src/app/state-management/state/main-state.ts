@@ -1,11 +1,11 @@
 import { Todo } from '../../model/todo';
 
 export interface State {
-    todosRemaining: number;
+    nextID: number;
     todoList: Todo[];
 }
 
 export const initialState: State = {
-    todosRemaining: 0,
+    nextID: 0,
     todoList: []
 };
