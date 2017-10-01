@@ -10,11 +10,9 @@ export class StatusBarComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   public removeCompletedHandler() {
     this.removeCompleted.emit()
   }
-
 }
