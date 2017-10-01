@@ -1,6 +1,6 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import { State, initialState } from '../state/main-state';
-import { ADD_TODO, TOGGLE_TODO, REMOVE_COMPLETE } from '../actions/main-action-creator';
+import { ADD_TODO, TOGGLE_TODO, REMOVE_COMPLETE, DELETE_TODO } from '../actions/main-action-creator';
 import { Todo } from '../../model/todo';
 
 export function mainReducer(state: State = initialState, action: Action) {
@@ -22,9 +22,9 @@ export function mainReducer(state: State = initialState, action: Action) {
         }
 
         case TOGGLE_TODO: {
-            const id: number = action.payload;
+            const idToToggle: number = action.payload;
             const todoList: Todo[] = state.todoList.map (
-                (todo, i) => i === id ? {...todo, completed: !todo.completed}
+                (todo) => todo.id === idToToggle ? {...todo, completed: !todo.completed}
                                       : todo
             );
 
@@ -43,6 +43,19 @@ export function mainReducer(state: State = initialState, action: Action) {
                 ...state,
                 todoList: todoList
             }
+        }
+
+        case DELETE_TODO: {
+          const idToDelete: number = action.payload;
+          const todoList: Todo[] = state.todoList.map (
+              (todo) => todo.id === idToDelete ? null
+                                               : todo
+          );
+
+          return  {
+            ...state,
+            todoList: todoList
+          }
         }
 
         default: {
