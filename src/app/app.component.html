@@ -1,4 +1,4 @@
 <h1>Todo List App (made with Angular + ngrx)</h1>
 <app-input-bar (add)="addTodo($event)"></app-input-bar>
-<app-list [todoList]="todoList" (toggleTodo)="toggleTodo($event)"></app-list>
+<app-list [todoList]="todoList" (toggleTodo)="toggleTodo($event)" (deleteTodo)="deleteTodo($event)"></app-list>
 <app-status-bar (removeCompleted)="removeCompleted()"></app-status-bar>

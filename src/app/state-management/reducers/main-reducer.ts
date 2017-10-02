@@ -35,26 +35,20 @@ export function mainReducer(state: State = initialState, action: Action) {
         }
 
         case REMOVE_COMPLETE: {
-            const todoList: Todo[] = state.todoList.filter (
-                todo => todo.completed === false
-            );
-
             return {
-                ...state,
-                todoList: todoList
+              ...state,
+              todoList: state.todoList.filter (
+                todo => todo.completed === false
+              )
             }
         }
 
         case DELETE_TODO: {
-          const idToDelete: number = action.payload;
-          const todoList: Todo[] = state.todoList.map (
-              (todo) => todo.id === idToDelete ? null
-                                               : todo
-          );
-
           return  {
             ...state,
-            todoList: todoList
+            todoList: state.todoList.filter (
+              todo => todo.id !== action.payload
+            )
           }
         }
 
