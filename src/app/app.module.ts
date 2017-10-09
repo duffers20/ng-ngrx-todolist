@@ -21,7 +21,7 @@ import { StatusBarComponent } from './status-bar/status-bar.component';
   imports: [
     BrowserModule,
     FormsModule,
-    StoreModule.forRoot({mainReducer}),
+    StoreModule.forRoot({ main: mainReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })

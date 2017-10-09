@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from './state-management/state/main-state';
 import { addTodo, toggleTodo, removeCompleted, deleteTodo } from './state-management/actions/main-action-creator';
@@ -10,13 +10,11 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public todoList: Observable<Todo[]>;
 
-  constructor(private store: Store<State>) { }
-
-  ngOnInit() {
-    this.todoList = this.store.select(state => state.todoList);
+  constructor(private store: Store<State>) {
+   this.todoList = this.store.select(state => state.todoList);
   }
 
   addTodo(newTodo: string) {

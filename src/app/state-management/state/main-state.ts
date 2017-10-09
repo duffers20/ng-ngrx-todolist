@@ -6,6 +6,6 @@ export interface State {
 }
 
 export const initialState: State = {
-    nextID: 0,
-    todoList: []
+    nextID: 1,
+    todoList: [{id: 0, description: 'AAA', completed: false}] // temporarily added for debugging
 };
