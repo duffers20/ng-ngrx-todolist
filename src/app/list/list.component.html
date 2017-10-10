@@ -1,4 +1,4 @@
-<ul *ngFor="let todo of todoList">
+<ul *ngFor="let todo of todoList | async">
   <li>
     <span (click)="toggle(todo.id)">
       ID: {{todo.id}} - Desc: {{todo.description}} - Completed: {{todo.completed}}
