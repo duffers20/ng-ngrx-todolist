@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from './state-management/state/main-state';
+import { AppState } from './state-management/state/app-state';
 import { addTodo, toggleTodo, removeCompleted, deleteTodo } from './state-management/actions/main-action-creator';
 import { Todo } from './model/todo';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +11,10 @@ import { Todo } from './model/todo';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public todoList: Todo[] = [];
+  public todoList: Observable<Todo[]>;
 
-  constructor(private store: Store<State>) {
-    this.store.subscribe(
-      state => {
-        this.todoList = state.todoList;
-      }
-    );
+  constructor(private store: Store<AppState>) {
+   this.todoList = this.store.select(state => state.main.todoList);
   }
 
   addTodo(newTodo: string) {

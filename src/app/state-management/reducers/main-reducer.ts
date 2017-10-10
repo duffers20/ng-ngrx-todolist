@@ -1,9 +1,19 @@
 import { ActionReducer, Action } from '@ngrx/store';
-import { State, initialState } from '../state/main-state';
 import { ADD_TODO, TOGGLE_TODO, REMOVE_COMPLETE, DELETE_TODO } from '../actions/main-action-creator';
+import * as todos from '../actions/main-action-creator';
 import { Todo } from '../../model/todo';
 
-export function mainReducer(state: State = initialState, action: Action) {
+interface MainState {
+  nextID: number;
+  todoList: Todo[];
+}
+
+const initialMainState: MainState = {
+  nextID: 0,
+  todoList: []
+}
+
+export function mainReducer(state: MainState = initialMainState, action: todos.Actions) {
     switch (action.type) {
 
         case ADD_TODO: {
