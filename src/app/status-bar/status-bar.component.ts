@@ -6,6 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./status-bar.component.css']
 })
 export class StatusBarComponent implements OnInit {
+  @Input() countRemaining: number;
   @Output() removeCompleted: EventEmitter<any> = new EventEmitter();
 
   constructor() { }

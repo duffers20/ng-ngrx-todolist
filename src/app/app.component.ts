@@ -12,9 +12,11 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AppComponent {
   public todoList: Observable<Todo[]>;
+  public todosRemaining: Observable<number>;
 
   constructor(private store: Store<AppState>) {
    this.todoList = this.store.select(state => state.main.todoList);
+   this.todosRemaining = this.store.select(state => state.main.todosRemaining);
   }
 
   addTodo(newTodo: string) {

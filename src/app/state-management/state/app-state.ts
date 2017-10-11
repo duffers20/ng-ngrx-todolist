@@ -4,5 +4,6 @@ export interface AppState {
   main: {
     nextID: number;
     todoList: Todo[];
+    todosRemaining: number;
   }
 }
