@@ -6,59 +6,69 @@ import { Todo } from '../../model/todo';
 interface MainState {
   nextID: number;
   todoList: Todo[];
+  todosRemaining: number;
 }
 
 const initialMainState: MainState = {
   nextID: 0,
-  todoList: []
+  todoList: [],
+  todosRemaining: 0
 }
 
 export function mainReducer(state: MainState = initialMainState, action: todos.Actions) {
     switch (action.type) {
 
         case ADD_TODO: {
-            const newId: number = state.nextID;
-            const newTodo: Todo = {
-                id: newId,
-                description: action.payload,
-                completed: false
-            };
+          const newId: number = state.nextID;
+          const newTodo: Todo = {
+              id: newId,
+              description: action.payload,
+              completed: false
+          };
 
-            return {
-                ...state,
-                todoList: [...state.todoList, newTodo],
-                nextID: newId + 1
-            }
+          return {
+              ...state,
+              todoList: [...state.todoList, newTodo],
+              nextID: newId + 1,
+              todosRemaining: state.todosRemaining + 1
+          }
         }
 
         case TOGGLE_TODO: {
-            const idToToggle: number = action.payload;
-            const todoList: Todo[] = state.todoList.map (
-                (todo) => todo.id === idToToggle ? {...todo, completed: !todo.completed}
-                                      : todo
-            );
+          const idToToggle: number = action.payload;
+          const todoList: Todo[] = state.todoList.map (
+              (todo) => todo.id === idToToggle ? {...todo, completed: !todo.completed}
+                                    : todo
+          );
 
-            return {
-                ...state,
-                todoList: todoList
-            }
+          return {
+              ...state,
+              todoList: todoList,
+              todosRemaining: todoList.filter(todo => todo.completed === false).length
+          }
         }
 
         case REMOVE_COMPLETE: {
-            return {
-              ...state,
-              todoList: state.todoList.filter (
-                todo => todo.completed === false
-              )
-            }
+          const todoList: Todo[] = state.todoList.filter (
+            todo => todo.completed === false
+          );
+
+          return {
+            ...state,
+            todoList: todoList,
+            todosRemaining: todoList.filter(todo => todo.completed === false).length
+          }
         }
 
         case DELETE_TODO: {
+          const todoList: Todo[] = state.todoList.filter (
+            todo => todo.id !== action.payload
+          );
+
           return  {
             ...state,
-            todoList: state.todoList.filter (
-              todo => todo.id !== action.payload
-            )
+            todoList: todoList,
+            todosRemaining: todoList.filter(todo => todo.completed === false).length
           }
         }
 
