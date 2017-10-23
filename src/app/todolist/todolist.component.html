@@ -1,0 +1,4 @@
+<p>{{ temp }}</p>
+<app-input-bar (add)="addTodo($event)"></app-input-bar>
+<app-list [todoList]="todoList" (toggleTodo)="toggleTodo($event)" (deleteTodo)="deleteTodo($event)"></app-list>
+<app-status-bar [countRemaining]="todosRemaining" (removeCompleted)="removeCompleted()"></app-status-bar>

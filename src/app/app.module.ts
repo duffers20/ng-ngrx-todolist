@@ -1,6 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
+import { environment } from '../environments/environment';
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { mainReducer } from './state-management/reducers/main-reducer';
 import { StoreModule } from '@ngrx/store';
@@ -10,17 +15,20 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { InputBarComponent } from './input-bar/input-bar.component';
 import { StatusBarComponent } from './status-bar/status-bar.component';
+import { TodoListComponent } from './todolist/todolist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     InputBarComponent,
-    StatusBarComponent
+    StatusBarComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule,
     StoreModule.forRoot({ main: mainReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25
