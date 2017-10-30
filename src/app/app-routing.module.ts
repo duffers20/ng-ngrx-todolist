@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'active', component: TodoListComponent, data: { filter: 'active' }},
   { path: 'completed', component: TodoListComponent, data: { filter: 'completed' }},
   { path: 'all', component: TodoListComponent, data: { filter: 'all' }},
-  { path: '', redirectTo: '/all', pathMatch: 'full' }
+  { path: '', component: TodoListComponent, data: { filter: 'all' }}
 ];
 
 @NgModule({
